@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""some description"""
+type Recipe {
+  id: ID!
+
+  """title description"""
+  title: String
+  description: String
+  creationDate: Date!
+  ingredients: [String!]!
+}
+
+"""some description"""
+type Post {
+  id: ID!
+
+  """title description"""
+  title: String!
+  content: String
+  published: Boolean!
+  viewCount: Float!
+  createdAt: Date!
+  updatedAt: Date!
+  author: User
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String
+  posts: [Post!]
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  post(id: String!): Post!
+  posts(skip: Int! = 0, take: Int! = 25): [Post!]!
+  user(id: String!): User!
+  allUsers: [User!]
+  recipe(id: String!): Recipe!
+  recipes(skip: Int! = 0, take: Int! = 25): [Recipe!]!
+}
+
+type Mutation {
+  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
+  removeRecipe(id: String!): Boolean!
+}
+
+input NewRecipeInput {
+  title: String!
+  description: String
+  ingredients: [String!]!
+}
+
+type Subscription {
+  recipeAdded: Recipe!
+}
